@@ -7,11 +7,17 @@ app
   .onError(({ code }) => {
     if (code === 'NOT_FOUND') return 'Route not found :('
   })
-  .get('/', ({ set }) => {
-    set.status = 'Unauthorized'
+  //state é uma função para atribuir um valor inicial a store , que pode sofrer mutação posteriormente.
+  .state('version', 1)
+
+  //store é uma representação de um objeto mutável global de fonte única de verdade para todo o aplicativo Elysia.
+  .get('/', ({ set, store: { version } }) => {
+    // set.status = 'Unauthorized'
     set.headers['Content-Type'] = 'text/plain'
 
-    new Response('hi')
+    return version
+
+    // new Response('hi')
   })
   .post('/hello/:id', ({ params: { id }, body }) => {
     const { name } = body
