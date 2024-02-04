@@ -1,12 +1,17 @@
 import { Elysia, t } from "elysia";
-import { swagger } from '@elysiajs/swagger'
+// import { swagger } from '@elysiajs/swagger'
 
 const app = new Elysia().get("/", () => "Hello Elysia")
 
 app
-  .use(swagger())
   .onError(({ code }) => {
     if (code === 'NOT_FOUND') return 'Route not found :('
+  })
+  .get('/', ({ set }) => {
+    set.status = 418
+    set.headers['Content-Type'] = 'text/plain'
+
+    return 'hi'
   })
   .post('/hello/:id', ({ params: { id }, body }) => {
     const { name } = body
