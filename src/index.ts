@@ -8,7 +8,7 @@ app
     if (code === 'NOT_FOUND') return 'Route not found :('
   })
   .get('/', ({ set }) => {
-    set.status = 418
+    set.status = 'Unauthorized'
     set.headers['Content-Type'] = 'text/plain'
 
     return 'hi'
