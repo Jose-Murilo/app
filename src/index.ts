@@ -11,7 +11,7 @@ app
     set.status = 'Unauthorized'
     set.headers['Content-Type'] = 'text/plain'
 
-    return 'hi'
+    new Response('hi')
   })
   .post('/hello/:id', ({ params: { id }, body }) => {
     const { name } = body
